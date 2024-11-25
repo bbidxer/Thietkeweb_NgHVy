@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Hệ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        #contactForm {
+            width: 500px;
+            margin: 0 auto;
+            border: 5px groove #993366;
+            background-color: #FFDDDD;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        #contactForm span {
+            display: inline-block;
+            width: 100px;
+            margin: 10px 0;
+            color: #333;
+        }
+        #contactForm input, #contactForm select {
+            width: calc(100% - 120px);
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+        }
+        #contactForm input[type="submit"] {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #contactForm input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        #contactForm select {
+            width: calc(100% - 120px);
+        }
+    </style>
+</head>
+<body>
+    <h1>Liên Hệ</h1>
+    <form id="contactForm" action="#" method="post">
+        <span>Họ:</span>
+        <input type="text" name="firstname" placeholder="Nhập họ của bạn" required><br>
+        <span>Tên:</span>
+        <input type="text" name="lastname" placeholder="Nhập tên của bạn" required><br>
+        <span>Email:</span>
+        <input type="email" name="email" placeholder="Nhập email của bạn" required><br>
+        <span>Thành phố:</span>
+        <select name="town" required>
+            <option value="">-- Chọn thành phố --</option>
+            <option value="HaNoi">Hà Nội</option>
+            <option value="HoChiMinh">Hồ Chí Minh</option>
+            <option value="DaNang">Đà Nẵng</option>
+            <option value="HaiPhong">Hải Phòng</option>
+            <option value="CanTho">Cần Thơ</option>
+            <option value="NhaTrang">Nha Trang</option>
+            <option value="Hue">Huế</option>
+        </select><br>
+        <input type="submit" value="Gửi">
+    </form

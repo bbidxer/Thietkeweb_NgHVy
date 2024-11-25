@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản Lý Sản Phẩm</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #FFDDDD;
+            border: 1px solid #993366;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"], button {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ccc;
+            text-align: left;
+            padding: 8px;
+        }
+        table th {
+            background-color: #993366;
+            color: white;
+        }
+        .actions button {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quản Lý Sản Phẩm</h1>
+        <form id="productForm">
+            <input type="text" id="productName" placeholder="Nhập tên sản phẩm" required>
+            <button type="button" onclick="addProduct()">Thêm</button>
+        </form>
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Hành Động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Danh sách sản phẩm sẽ được thêm ở đây -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let products = [];
+        let editIndex = -1;
+
+        // Hàm hiển thị danh sách sản phẩm
+        function displayProducts() {
+            const productTable = document.getElementById("productTable").querySelector("tbody");
+            productTable.innerHTML = ""; // Xóa nội dung cũ
+            products.forEach((product, index) => {
+                productTable.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${product}</td>
+                        <td class="actions">
+                            <button onclick="editProduct(${index})">Sửa</button>
+                            <button onclick="deleteProduct(${index})">Xóa</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Hàm thêm sản phẩm
+        function addProduct() {
+            const productName = document.getElementById("productName").value.trim();
+            if (productName === "") {
+                alert("Tên sản phẩm không được để trống!");
+                return;
+            }
+
+            if (editIndex >= 0) {
+                // Cập nhật sản phẩm đang sửa
+                products[editIndex] = productName;
+                editIndex = -1;
+                document.getElementById("productName").value = "";
+                alert("Sản phẩm đã được cập nhật!");
+            } else {
+                // Thêm sản phẩm mới
+                products.push(productName);
+                document.getElementById("productName").value = "";
+                alert("Sản phẩm đã được thêm!");
+            }
+
+            displayProducts();
+        }
+
+        // Hàm sửa sản phẩm
+        function editProduct(index) {
+            document.getElementById("productName").value = products[index];
+            editIndex = index;
+        }
+
+        // Hàm xóa sản phẩm
+        function deleteProduct(index) {
+            if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
+                products.splice(index, 1);
+                displayProducts();
+                alert("Sản phẩm đã được xóa!");
+            }
+        }
+    </script>
+</body>
+</html>

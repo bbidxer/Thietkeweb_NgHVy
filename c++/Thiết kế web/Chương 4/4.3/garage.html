@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage Gallery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #993366;
+            text-align: center;
+        }
+
+        .slideshow {
+            width: 1600px;
+            margin: 0 auto;
+            border: 5px groove #993366;
+            background-color: #FFDDDD;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slideshow_inner {
+            display: flex;
+            width: calc(400px * 6);
+            transition: margin-left 0.5s ease;
+            margin-left: 0;
+        }
+
+        .slideshow_inner img {
+            width: 400px;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .button {
+            margin: 20px 0;
+        }
+
+        .button input {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background-color: #993366;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .button input:hover {
+            background-color: #993366;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>GALLERY</h1>
+    </header>
+    <section>
+        <div class="slideshow">
+            <div class="slideshow_inner">
+                <img src="images/718.png" alt="718">
+                <img src="images/911.png" alt="911">
+                <img src="images/cayenne.png" alt="Cayenne">
+                <img src="images/macan.png" alt="Macan">
+                <img src="images/panamera.png" alt="Panamera">
+                <img src="images/taycan.png" alt="Taycan">
+            </div>
+        </div>
+        <div class="button">
+            <input type="button" id="btnLeft" value="<<">
+            <input type="button" id="btnRight" value=">>">
+        </div>
+    </section>
+
+    <script>
+        $(document).ready(function () {
+            const imageWidth = 400;
+            const imagesVisible = 4;
+            const totalImages = $(".slideshow_inner img").length;
+            let currentIndex = 0;
+
+            function updateSlideshow() {
+                const marginLeft = -(currentIndex * imageWidth);
+                $(".slideshow_inner").css("margin-left", marginLeft + "px");
+            }
+
+            $("#btnLeft").click(function () {
+                if (currentIndex === 0) {
+                    currentIndex = totalImages - imagesVisible;
+                } else {
+                    currentIndex--;
+                }
+                updateSlideshow();
+            });
+
+            $("#btnRight").click(function () {
+                if (currentIndex === totalImages - imagesVisible) {
+                    currentIndex = 0;
+                } else {
+                    currentIndex++;
+                }
+                updateSlideshow();
+            });
+        });
+    </script>
+</body>
+</html>

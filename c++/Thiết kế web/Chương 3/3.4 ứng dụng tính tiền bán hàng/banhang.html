@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tính Tiền Bán Hàng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #FFDDDD;
+            border: 5px groove #993366;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+        table th {
+            background-color: #993366;
+            color: white;
+        }
+        input[type="checkbox"], input[type="number"], input[type="text"] {
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        input[type="number"]:disabled {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #totalAmount {
+            font-weight: bold;
+            color: #993366;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tính Tiền Bán Hàng</h1>
+        <form id="salesForm">
+            <table>
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên Hàng Hóa</th>
+                        <th>Số Lượng Tồn</th>
+                        <th>Số Lượng Mua</th>
+                        <th>Đơn Giá (VNĐ)</th>
+                        <th>Chọn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>CPU</td>
+                        <td>10</td>
+                        <td><input type="number" min="0" max="10" disabled onchange="checkQuantity(this)"></td>
+                        <td>5,000 VNĐ</td>
+                        <td><input type="checkbox" onchange="toggleQuantity(this)"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>HDD</td>
+                        <td>15</td>
+                        <td><input type="number" min="0" max="15" disabled onchange="checkQuantity(this)"></td>
+                        <td>2,000 VNĐ</td>
+                        <td><input type="checkbox" onchange="toggleQuantity(this)"></td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>RAM</td>
+                        <td>20</td>
+                        <td><input type="number" min="0" max="20" disabled onchange="checkQuantity(this)"></td>
+                        <td>1,500 VNĐ</td>
+                        <td><input type="checkbox" onchange="toggleQuantity(this)"></td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>ROM</td>
+                        <td>8</td>
+                        <td><input type="number" min="0" max="8" disabled onchange="checkQuantity(this)"></td>
+                        <td>1,000 VNĐ</td>
+                        <td><input type="checkbox" onchange="toggleQuantity(this)"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="buttons">
+                <label>
+                    <input type="checkbox" id="vatCheckbox"> Tính VAT (10%)
+                </label>
+                <br>
+                <button type="button" onclick="calculateTotal()">OK</button>
+                <button type="button" onclick="resetForm()">Nhập Lại</button>
+            </div>
+        </form>
+        <p id="totalAmount">Tổng cộng: 0</p>
+    </div>
+
+    <script>
+       
+        function toggleQuantity(checkbox) {
+            const row = checkbox.closest('tr');
+            const quantityInput = row.querySelector('input[type="number"]');
+            if (checkbox.checked) {
+                const max = parseInt(row.cells[2].textContent); 
+                quantityInput.disabled = false;
+                quantityInput.value = 1; 
+                quantityInput.setAttribute("max", max); 
+            } else {
+                quantityInput.disabled = true;
+                quantityInput.value = ''; 
+            }
+        }
+        function checkQuantity(input) {
+            const max = parseInt(input.getAttribute("max"));
+            if (parseInt(input.value) > max) {
+                alert("Số lượng mua không được vượt quá số lượng tồn!");
+                input.value = max; 
+            }
+        }
+ function calculateTotal() {
+            const rows = document.querySelectorAll('tbody tr');
+            let total = 0;
+            rows.forEach(row => {
+                const checkbox = row.querySelector('input[type="checkbox"]');
+                const quantityInput = row.querySelector('input[type="number"]');
+                const price = parseInt(row.cells[4].textContent.replace(/[^0-9]/g, ''));
+                if (checkbox.checked && quantityInput.value) {
+                    total += quantityInput.value * price;
+                }
+            });
+
+            
+            const vatCheckbox = document.getElementById('vatCheckbox');
+            if (vatCheckbox.checked) {
+                total *= 1.1; 
+            }
+
+            document.getElementById('totalAmount').textContent = `Tổng cộng: ${total.toLocaleString('vi-VN')} VNĐ`;
+        }
+
+        
+        function resetForm() {
+            document.getElementById('salesForm').reset();
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.disabled = true;
+                input.value = '';
+            });
+            document.getElementById('totalAmount').textContent = 'Tổng cộng: 0';
+        }
+    </script>
+</body>
+</html>

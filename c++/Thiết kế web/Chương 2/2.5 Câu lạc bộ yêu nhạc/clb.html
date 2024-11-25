@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Thành Viên CLB Yêu Nhạc</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        #form1 {
+            width: 500px;
+            margin: 0 auto;
+            border: 5px groove #993366;
+            background-color: #FFDDDD;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        #form1 table {
+            width: 100%;
+            border-spacing: 0;
+        }
+        #form1 table td {
+            border: 1px solid #CC9999;
+            padding: 10px;
+        }
+        input[type="text"], input[type="password"], input[type="number"], textarea, select, datalist {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"], input[type="reset"] {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            background-color: #0056b3;
+        }
+        textarea {
+            height: 80px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" method="post">
+        <table>
+            <caption><strong>ĐĂNG KÝ THÀNH VIÊN CLB YÊU NHẠC</strong></caption>
+            <tr>
+                <td>Họ tên</td>
+                <td><input type="text" id="txtHoTen" placeholder="Nhập họ tên" required></td>
+            </tr>
+            <tr>
+                <td>Tên đăng nhập</td>
+                <td><input type="text" id="txtUserName" placeholder="Nhập tên đăng nhập" required></td>
+            </tr>
+            <tr>
+                <td>Mật khẩu</td>
+                <td><input type="password" id="txtPass" placeholder="Nhập mật khẩu" required></td>
+            </tr>
+            <tr>
+                <td>Gõ lại mật khẩu</td>
+                <td><input type="password" id="txtRepass" placeholder="Nhập lại mật khẩu" required></td>
+            </tr>
+            <tr>
+                <td>Giới tính</td>
+                <td>
+                    <input type="radio" id="rdGioiTinh" name="gender" value="Nam" checked> Nam
+                    <input type="radio" id="rdGioiTinh" name="gender" value="Nữ"> Nữ
+                </td>
+            </tr>
+            <tr>
+                <td>Ngoại ngữ</td>
+                <td>
+                    <input type="checkbox" id="chkAnh" value="Anh văn"> Anh văn
+                    <input type="checkbox" id="chkPhap" value="Pháp văn"> Pháp văn
+                    <input type="checkbox" id="chkHoa" value="Hoa văn"> Hoa văn
+                </td>
+            </tr>
+            <tr>
+                <td>Nghề nghiệp</td>
+                <td>
+                    <select id="cboNgheNghiep">
+                        <option value="0">Bạn làm nghề gì</option>
+                        <option value="1">Học sinh - Sinh viên</option>
+                        <option value="2">Giáo viên</option>
+                        <option value="3">Nhân viên</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Độ tuổi</td>
+                <td>
+                    <input type="number" id="txtTuoi" min="18" max="45" value="20" required>
+                </td>
+            </tr>
+            <tr>
+                <td>Thành phố</td>
+                <td>
+                    <input type="text" id="txtThanhPho" list="cities" placeholder="Chọn thành phố" required>
+                    <datalist id="cities">
+                        <option value="Hà Nội">
+                        <option value="Hồ Chí Minh">
+                        <option value="Đà Nẵng">
+                        <option value="Hải Phòng">
+                        <option value="Cần Thơ">
+                        <option value="Nha Trang">
+                        <option value="Huế">
+                    </datalist>
+                </td>
+            </tr>
+            <tr>
+                <td>Hình</td>
+                <td><input type="file" id="fHinh"></td>
+            </tr>
+            <tr>
+                <td>Sở thích</td>
+                <td><textarea id="txtSoThich" placeholder="Nhập sở thích"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" id="btnDangKy" value="Đăng ký">
+                    <input type="reset" id="btnXoa" value="Làm lại">
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" id="NgayDangKy" value="03/23/2023">
+    </form>
+</table>
+<input type="hidden" id="NgayDangKy" value="03/23/2023">
+</form>
+<!-- Thêm đường dẫn sang trang liên hệ -->
+<p><a href="contact-us-form.html">Liên hệ với chúng tôi</a></p>
+<p style="text-align: center; margin-top: 20px;">
+    Góp ý? <a href="gop-y.html" style="color: #007BFF; text-decoration: none;">Nhấn vào đây để gửi góp ý</a>
+</p>
+
+</body>
+</html>
