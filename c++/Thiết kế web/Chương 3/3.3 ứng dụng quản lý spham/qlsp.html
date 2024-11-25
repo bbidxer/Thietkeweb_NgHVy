@@ -77,7 +77,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Danh sách sản phẩm sẽ được thêm ở đây -->
             </tbody>
         </table>
     </div>
@@ -85,8 +84,6 @@
     <script>
         let products = [];
         let editIndex = -1;
-
-        // Hàm hiển thị danh sách sản phẩm
         function displayProducts() {
             const productTable = document.getElementById("productTable").querySelector("tbody");
             productTable.innerHTML = ""; // Xóa nội dung cũ
@@ -103,8 +100,6 @@
                 `;
             });
         }
-
-        // Hàm thêm sản phẩm
         function addProduct() {
             const productName = document.getElementById("productName").value.trim();
             if (productName === "") {
@@ -113,7 +108,6 @@
             }
 
             if (editIndex >= 0) {
-                // Cập nhật sản phẩm đang sửa
                 products[editIndex] = productName;
                 editIndex = -1;
                 document.getElementById("productName").value = "";
@@ -127,14 +121,10 @@
 
             displayProducts();
         }
-
-        // Hàm sửa sản phẩm
         function editProduct(index) {
             document.getElementById("productName").value = products[index];
             editIndex = index;
         }
-
-        // Hàm xóa sản phẩm
         function deleteProduct(index) {
             if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
                 products.splice(index, 1);
